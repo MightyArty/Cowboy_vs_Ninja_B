@@ -23,14 +23,17 @@ namespace ariel
         void setX(double new_x);
         void setY(double new_y);
 
-        void print();
+        /**
+         * @brief printing function for the Point instance
+         */
+        void print() const;
 
         /**
          * @brief computes the distance of two points
          * @return the distance
          * @param other the second point to compare
          */
-        double distance(Point &other);
+        double distance(const Point &other) const;
 
         /**
          * @param first the source point

@@ -11,8 +11,6 @@
 
 #include <vector>
 
-// #define TEAM_SIZE 10
-
 constexpr int TEAM_SIZE = 10;
 
 namespace ariel
