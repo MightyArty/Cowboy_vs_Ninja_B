@@ -11,14 +11,14 @@ namespace ariel
     class Character
     {
     protected:
-        Point &location; // location of the Carachter on the board
+        Point location; // location of the Carachter on the board
         int health;
         string name;
 
     public:
         Character(string name, Point &location, int health);
         Character(Character &other_character);
-        virtual ~Character();
+        virtual ~Character() = default;
 
         /**
          * @brief Virtual function to overide
@@ -30,7 +30,7 @@ namespace ariel
          * @brief Virtual function to overide
          * @return the location of the Player
          */
-        virtual Point getLocation();
+        virtual Point getLocation() const;
 
         /**
          * @brief Virtual function to override

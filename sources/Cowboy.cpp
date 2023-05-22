@@ -54,6 +54,6 @@ void Cowboy::setBullets()
 string Cowboy::print() const
 {
     string s = "";
-    s = s + "Cowboy [" + this->name + ", Health: " + to_string(this->health) + ", Location: (" + to_string(this->location.getX()) + "," + to_string(this->location.getY()) + ")]";
+    s = s + "Cowboy " + this->name + ", Health: " + to_string(this->health) + ", Location: (" + to_string(this->location.getX()) + "," + to_string(this->location.getY()) + ")";
     return s;
 }

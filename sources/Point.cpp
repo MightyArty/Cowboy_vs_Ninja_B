@@ -43,7 +43,7 @@ double Point::distance(const Point &other) const
     return result;
 }
 
-Point Point::moveTowards(Point &first, Point &second, double distance)
+Point Point::moveTowards(const Point &first, const Point &second, double distance)
 {
     if (distance < 0)
     {

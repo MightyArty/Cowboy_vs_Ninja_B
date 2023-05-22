@@ -41,7 +41,7 @@ namespace ariel
          * @param distance the max distance between the two points
          * @return the closest point to the destination point
          */
-        Point moveTowards(Point &first, Point &second, double distance);
+        static Point moveTowards(const Point &first, const Point &second, double distance);
     };
 }
 

@@ -7,9 +7,8 @@ namespace ariel
 {
     class Ninja : public Character
     {
-    private:
+    protected:
         int speed;
-        int health;
 
     public:
         /**
@@ -18,29 +17,27 @@ namespace ariel
          * @param location the location of the Ninja on the board
          * @return new object of Ninja
          */
-        Ninja(string name, Point location);
+        Ninja(string name, Point location, int speed, int health);
 
         /**
          * Overriding the Character function of print
          */
-        string print() override;
+        string print() const override;
 
         /**
          * @brief Moves towards the enemy Character
          */
-        virtual void move(Character *other);
+        void move(Character *other);
 
         /**
          * @brief Taking points from other Character object by slashing him
          */
-        virtual void slash(Character *other);
+        void slash(Character *other);
 
         /**
          * @brief Returns the amount of health for particular ninja
          */
         virtual int getHealth();
-
-        virtual int setHealth(int helath);
     };
 }
 

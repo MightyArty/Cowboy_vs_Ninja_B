@@ -15,7 +15,7 @@ string Character::getName()
     return this->name;
 }
 
-Point Character::getLocation()
+Point Character::getLocation() const
 {
     return this->location;
 }
