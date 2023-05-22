@@ -10,13 +10,13 @@ namespace ariel
 {
     class Character
     {
-    private:
+    protected:
         Point &location; // location of the Carachter on the board
         int health;
         string name;
 
     public:
-        Character(string name, Point &location);
+        Character(string name, Point &location, int health);
         Character(Character &other_character);
         virtual ~Character();
 
@@ -31,6 +31,12 @@ namespace ariel
          * @return the location of the Player
          */
         virtual Point getLocation();
+
+        /**
+         * @brief Virtual function to override
+         * @return the amount of health
+         */
+        virtual int getHealth();
 
         /**
          * @return true if the given Character is alive, false otherwise
@@ -49,14 +55,7 @@ namespace ariel
          */
         virtual void hit(int points_to_take);
 
-        virtual string print();
-
-        /**
-         * @brief function two compare to objects of Character
-         * @param other the second Character object
-         * @return true if the objects are the same, false otherwise
-         */
-        Character &operator=(const Character &other);
+        virtual string print() const = 0;
     };
 }
 

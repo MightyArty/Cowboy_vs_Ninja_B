@@ -2,12 +2,11 @@
 using namespace std;
 using namespace ariel;
 
-Character::Character(string name, Point &location) : name(name), location(location)
+Character::Character(string name, Point &location, int health) : name(name), location(location), health(health)
 {
-    this->health = 0;
 }
 
-Character::Character(Character &other) : name(other.name), location(other.location) {}
+Character::Character(Character &other) : name(other.name), location(other.location), health(other.health) {}
 
 Character::~Character(){};
 
@@ -18,32 +17,43 @@ string Character::getName()
 
 Point Character::getLocation()
 {
-    Point p(0, 0);
-    return p;
+    return this->location;
+}
+
+int Character::getHealth()
+{
+    return this->health;
 }
 
 bool Character::isAlive()
 {
-    return true;
+    if (this->getHealth() > 0)
+    {
+        return true;
+    }
+    else
+        return false;
 }
 
 double Character::distance(Character *other)
 {
-    return 0;
+    return getLocation().distance(other->getLocation());
 }
 
 void Character::hit(int points_to_take)
 {
-    return;
-}
+    if (points_to_take == 0)
+    {
+        throw invalid_argument("Can't reduce 0 helath points");
+    }
 
-string Character::print()
-{
-    string s = "";
-    return s;
-}
+    else if (points_to_take < 0)
+    {
+        throw invalid_argument("Can't reduce negative amount of health");
+    }
 
-Character &Character::operator=(const Character &other)
-{
-    return *this;
+    else
+    {
+        this->health = this->health - points_to_take;
+    }
 }

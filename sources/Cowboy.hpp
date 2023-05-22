@@ -32,11 +32,21 @@ namespace ariel
         bool hasBoolets();
 
         /**
+         * @brief reduce the amount of Cowboy bullets by 1
+         */
+        void reduceBoolets();
+
+        /**
+         * @brief setting the Cowboy bullets to 6
+         */
+        void setBullets();
+
+        /**
          * @brief reload the gun with 6 new boolets
          */
         void reload();
 
-        string print() override;
+        string print() const override;
     };
 }
 

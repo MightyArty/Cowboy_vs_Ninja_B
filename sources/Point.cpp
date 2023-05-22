@@ -70,5 +70,8 @@ Point Point::moveTowards(Point &first, Point &second, double distance)
     double new_x = first.getX() + (scaleFactor * (second.getX() - first.getX()));
     double new_y = first.getY() + (scaleFactor * (second.getY() - first.getY()));
 
-    return Point(new_x, new_y);
+    Point newPoint;
+    newPoint.setX(new_x);
+    newPoint.setY(new_y);
+    return newPoint;
 }
