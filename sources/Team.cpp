@@ -141,75 +141,78 @@ void Team::attack(Team *other_team)
 
     // find the enemy to attack
     Character *enemy = nextLeader(other_team, this->get_team_leader());
-    if (enemy == nullptr)
+    if (enemy != nullptr)
+    {
+        // Iterate through the Cowboy's
+        for (auto i : this->getWarriorsGroup())
+        {
+            // check if there still members in both teams
+            if ((this->stillAlive() == 0) || (other_team->stillAlive() == 0))
+            {
+                return;
+            }
+            // if the enemy team leader is dead, find new one to attack
+            if (!(enemy->isAlive()))
+            {
+                enemy = nextLeader(other_team, enemy);
+            }
+
+            // if the warrior is dead continue to search for new one
+            if (!(i->isAlive()))
+            {
+                continue;
+            }
+
+            Cowboy *cowboy = dynamic_cast<Cowboy *>(i);
+            if (cowboy != nullptr)
+            {
+                if (cowboy->hasboolets())
+                {
+                    cowboy->shoot(enemy);
+                }
+                else
+                {
+                    cowboy->reload();
+                }
+            }
+        }
+
+        // Iterate through the Ninja's
+        for (auto i : this->getWarriorsGroup())
+        {
+            // check if there still members in both teams
+            if ((this->stillAlive() == 0) || (other_team->stillAlive() == 0))
+            {
+                return;
+            }
+            // if the enemy team leader is dead, find new one to attack
+            if (!(enemy->isAlive()))
+            {
+                enemy = nextLeader(other_team, enemy);
+            }
+
+            // if the warrior is dead continue to search for new one
+            if (!(i->isAlive()))
+            {
+                continue;
+            }
+
+            Ninja *ninja = dynamic_cast<Ninja *>(i);
+            if (ninja != nullptr)
+            {
+                if (ninja->distance(enemy) <= 1)
+                {
+                    ninja->slash(enemy);
+                }
+                else
+                {
+                    ninja->move(enemy);
+                }
+            }
+        }
+    }
+    else if (enemy == nullptr)
         return;
-
-    // Iterate through the Cowboy's
-    for (auto i : this->getWarriorsGroup())
-    {
-        // check if there still members in both teams
-        if ((this->stillAlive() == 0) || (other_team->stillAlive() == 0))
-        {
-            return;
-        }
-        // if the enemy team leader is dead, find new one to attack
-        if (!(enemy->isAlive()))
-        {
-            enemy = nextLeader(other_team, enemy);
-        }
-
-        // if the warrior is dead continue to search for new one
-        if (!(i->isAlive()))
-        {
-            continue;
-        }
-
-        // if it's a Cowboy, check if he has boolets to shoot the enemy
-        if (dynamic_cast<Cowboy *>(i) != nullptr)
-        {
-            if (dynamic_cast<Cowboy *>(i)->hasboolets())
-            {
-                dynamic_cast<Cowboy *>(i)->shoot(enemy);
-            }
-            else
-            {
-                dynamic_cast<Cowboy *>(i)->reload();
-            }
-        }
-    }
-
-    // Iterate through the Ninja's
-    for (auto i : this->getWarriorsGroup())
-    {
-        // check if there still members in both teams
-        if ((this->stillAlive() == 0) || (other_team->stillAlive() == 0))
-        {
-            return;
-        }
-        // if the enemy team leader is dead, find new one to attack
-        if (!(enemy->isAlive()))
-        {
-            enemy = nextLeader(other_team, enemy);
-        }
-
-        // if the warrior is dead continue to search for new one
-        if (!(i->isAlive()))
-        {
-            continue;
-        }
-
-        if (dynamic_cast<Ninja *>(i) != nullptr)
-        {
-            if (i->distance(enemy) <= 1)
-            {
-                dynamic_cast<Ninja *>(i)->slash(enemy);
-            }
-            else
-            {
-                dynamic_cast<Ninja *>(i)->move(enemy);
-            }
-        }
-    }
 }
 
 /**
@@ -219,15 +222,14 @@ void Team::attack(Team *other_team)
 int Team::stillAlive()
 {
     int counter = 0;
-    // iterate through the warrios vector and check if there are any Cowboy/Ninja alive
-    for (auto i = getWarriorsGroup().begin(); i < getWarriorsGroup().end(); i++)
+
+    for (auto i : getWarriorsGroup())
     {
-        if ((*i != NULL) && (*i)->getHealth() > 0)
+        if (i && i->getHealth() > 0)
         {
             counter++;
         }
     }
-
     return counter;
 }
 
@@ -236,8 +238,8 @@ int Team::stillAlive()
  */
 void Team::print()
 {
-    for (auto i = warriors_group.begin(); i != warriors_group.end(); i++)
+    for (auto i : getWarriorsGroup())
     {
-        cout << (*i)->print() << endl;
+        cout << i->print() << endl;
     }
 }

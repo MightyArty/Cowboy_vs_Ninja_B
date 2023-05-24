@@ -19,7 +19,7 @@ void Ninja::move(Character *other)
 
 void Ninja::slash(Character *other)
 {
-    if (!(this->isAlive()) || !(other->isAlive()))
+    if (!(isAlive()) || !(other->isAlive()))
     {
         throw runtime_error("The Ninja or the Enemy are not alive!");
     }
@@ -29,7 +29,7 @@ void Ninja::slash(Character *other)
         throw runtime_error("Ninja can't slash himself!");
     }
 
-    if (this->distance(other) <= 1)
+    if (distance(other) <= 1)
     {
         other->hit(40);
     }

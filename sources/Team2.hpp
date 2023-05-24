@@ -21,10 +21,6 @@ namespace ariel
         ~Team2() override = default;
 
         void attack(Team *other_team) override;
-
-        void print() override;
-
-        int stillAlive() override;
     };
 }
 

@@ -7,7 +7,7 @@ Cowboy::Cowboy(string name, Point location) : Character(name, location, 110), bu
 
 void Cowboy::shoot(Character *other)
 {
-    if (!(this->isAlive()) || !(other->isAlive()))
+    if (!(isAlive()) || !(other->isAlive()))
     {
         throw runtime_error("Can't shoot if the cowboy or the enemy is dead");
     }
@@ -17,7 +17,7 @@ void Cowboy::shoot(Character *other)
         throw runtime_error("Cowboy can't shoot himself!");
     }
 
-    if (this->hasboolets())
+    if (hasboolets())
     {
         other->hit(10);
         reduceBoolets();
@@ -41,7 +41,7 @@ bool Cowboy::hasboolets() const
 
 void Cowboy::reload()
 {
-    if (this->isAlive())
+    if (isAlive())
     {
         setBullets();
     }

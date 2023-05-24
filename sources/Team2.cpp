@@ -4,31 +4,6 @@ using namespace ariel;
 
 Team2::Team2(Character *member) : Team(member) {}
 
-int Team2::stillAlive()
-{
-    int counter = 0;
-
-    for (auto i = this->getWarriorsGroup().begin(); i != this->getWarriorsGroup().end(); i++)
-    {
-        if ((*i)->getHealth() > 0 && (*i))
-        {
-            counter++;
-        }
-    }
-    return counter;
-}
-
-void Team2::print()
-{
-    for (auto i = this->getWarriorsGroup().begin(); i != this->getWarriorsGroup().end(); i++)
-    {
-        if ((*i)->getHealth() > 0 && (*i != NULL))
-        {
-            cout << (*i)->print() << endl;
-        }
-    }
-}
-
 void Team2::attack(Team *other)
 {
     if (other == nullptr)
@@ -69,45 +44,50 @@ void Team2::attack(Team *other)
     }
 
     Character *enemy = nextLeader(other, this->get_team_leader());
-    if (enemy == nullptr)
-        return;
-
-    for (auto i : this->getWarriorsGroup())
+    if (enemy != nullptr)
     {
-        if (!(enemy->isAlive()))
+        for (auto i : this->getWarriorsGroup())
         {
-            enemy = nextLeader(other, enemy);
-        }
-
-        if ((this->stillAlive() == 0) || (other->stillAlive() == 0))
-        {
-            return;
-        }
-
-        if (!(i->isAlive()))
-            continue;
-
-        if (dynamic_cast<Ninja *>(i) != nullptr)
-        {
-            if (i->distance(enemy) <= 1)
+            if (!(enemy->isAlive()))
             {
-                dynamic_cast<Ninja *>(i)->slash(enemy);
+                enemy = nextLeader(other, enemy);
             }
-            else
+
+            if ((this->stillAlive() == 0) || (other->stillAlive() == 0))
             {
-                dynamic_cast<Ninja *>(i)->move(enemy);
+                return;
             }
-        }
-        if (dynamic_cast<Cowboy *>(i) != nullptr)
-        {
-            if (dynamic_cast<Cowboy *>(i)->hasboolets())
+
+            if (!(i->isAlive()))
+                continue;
+
+            Ninja *ninja = dynamic_cast<Ninja *>(i);
+            if (ninja != nullptr)
             {
-                dynamic_cast<Cowboy *>(i)->shoot(enemy);
+                if (ninja->distance(enemy) <= 1)
+                {
+                    ninja->slash(enemy);
+                }
+                else
+                {
+                    ninja->move(enemy);
+                }
             }
-            else
+
+            Cowboy *cowboy = dynamic_cast<Cowboy *>(i);
+            if (cowboy != nullptr)
             {
-                dynamic_cast<Cowboy *>(i)->reload();
+                if (cowboy->hasboolets())
+                {
+                    cowboy->shoot(enemy);
+                }
+                else
+                {
+                    cowboy->reload();
+                }
             }
         }
     }
+    else if (enemy == nullptr)
+        return;
 }
