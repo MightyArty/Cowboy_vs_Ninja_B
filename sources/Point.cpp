@@ -60,7 +60,7 @@ Point Point::moveTowards(const Point &first, const Point &second, double distanc
 
     if (current_d <= distance)
     {
-        return first;
+        return second;
     }
 
     // calculate the factor to move from the source point

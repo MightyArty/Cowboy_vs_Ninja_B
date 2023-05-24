@@ -33,11 +33,6 @@ namespace ariel
          * @brief Taking points from other Character object by slashing him
          */
         void slash(Character *other);
-
-        /**
-         * @brief Returns the amount of health for particular ninja
-         */
-        virtual int getHealth();
     };
 }
 

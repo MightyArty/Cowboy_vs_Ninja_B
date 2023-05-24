@@ -14,29 +14,29 @@ namespace ariel
         Point location; // location of the Carachter on the board
         int health;
         string name;
+        bool assigned;
 
     public:
         Character(string name, Point &location, int health);
-        Character(Character &other_character);
         virtual ~Character() = default;
 
         /**
          * @brief Virtual function to overide
          * @return the name of the Player
          */
-        virtual string getName();
+        string getName();
 
         /**
          * @brief Virtual function to overide
          * @return the location of the Player
          */
-        virtual Point getLocation() const;
+        Point getLocation() const;
 
         /**
          * @brief Virtual function to override
          * @return the amount of health
          */
-        virtual int getHealth();
+        int getHealth();
 
         /**
          * @return true if the given Character is alive, false otherwise
@@ -54,6 +54,17 @@ namespace ariel
          * @param points the amount of health to take
          */
         virtual void hit(int points_to_take);
+
+        /**
+         * @brief Function to check if the Character is already in Team
+         * @return true if the Characer is assigned, false otherwise
+         */
+        virtual bool isAssigned();
+
+        /**
+         * @brief Assigning Character to a team by raising the flag
+         */
+        virtual void assign(bool flag);
 
         virtual string print() const = 0;
     };

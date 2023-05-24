@@ -3,7 +3,4 @@
 using namespace std;
 using namespace ariel;
 
-TrainedNinja::TrainedNinja(string name, Point location) : Ninja(name, location)
-{
-    this->setHealth(120);
-}
+TrainedNinja::TrainedNinja(string name, Point location) : Ninja(name, location, 12, 120) {}

@@ -29,7 +29,7 @@ namespace ariel
         /**
          * @return true if the Cowboy as boolets, false otherwise
          */
-        bool hasBoolets();
+        bool hasboolets() const;
 
         /**
          * @brief reduce the amount of Cowboy bullets by 1

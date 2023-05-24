@@ -14,7 +14,7 @@ string Ninja::print() const
 
 void Ninja::move(Character *other)
 {
-    this->location = Point::moveTowards(this->location, other->getLocation(), this->speed);
+    this->location = Point::moveTowards(this->getLocation(), other->getLocation(), this->speed);
 }
 
 void Ninja::slash(Character *other)
@@ -24,13 +24,13 @@ void Ninja::slash(Character *other)
         throw runtime_error("The Ninja or the Enemy are not alive!");
     }
 
+    if (this == other)
+    {
+        throw runtime_error("Ninja can't slash himself!");
+    }
+
     if (this->distance(other) <= 1)
     {
         other->hit(40);
     }
-}
-
-int Ninja::getHealth()
-{
-    return this->health;
 }

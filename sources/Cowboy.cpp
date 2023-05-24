@@ -12,7 +12,12 @@ void Cowboy::shoot(Character *other)
         throw runtime_error("Can't shoot if the cowboy or the enemy is dead");
     }
 
-    if (this->hasBoolets())
+    if (this == other)
+    {
+        throw runtime_error("Cowboy can't shoot himself!");
+    }
+
+    if (this->hasboolets())
     {
         other->hit(10);
         reduceBoolets();
@@ -24,7 +29,7 @@ void Cowboy::reduceBoolets()
     this->bullets = this->bullets - 1;
 }
 
-bool Cowboy::hasBoolets()
+bool Cowboy::hasboolets() const
 {
     if (this->bullets > 0)
     {
